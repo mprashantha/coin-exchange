@@ -30,13 +30,7 @@ export default class Coin extends Component {
 */
   handleClick(event) {
     event.preventDefault();
-
-    const randomPercent = 0.995 + Math.random() * 0.01;
-    this.setState( function(oldState) {
-      return {
-        price: oldState.price * randomPercent
-      };
-    }); 
+    this.props.handleRefresh(this.props.ticker);
   }
 
   render() {
@@ -44,7 +38,7 @@ export default class Coin extends Component {
         <tr>
             <Td>{this.props.name}</Td>
             <Td>{this.props.ticker}</Td>
-            <Td>{this.state.price}</Td>
+            <Td>{this.props.price}</Td>
             <Td>
               <form action='#' method='POST'>
                 <button onClick={this.handleClick}>refresh</button>

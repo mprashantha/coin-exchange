@@ -38,14 +38,30 @@ class App extends React.Component {
         }
       ]
     }
+    this.handleRefresh = this.handleRefresh.bind(this);
   }
 
+  handleRefresh(tickerChanged){
+    const newCoinData = this.state.coinData.map(function({ticker, name, price}) { 
+      let newPrice = price;
+      if(ticker === tickerChanged){
+        const randomPercent = 0.995 + Math.random() * 0.01;
+        newPrice = newPrice * randomPercent;
+      }
+      return {
+          ticker, name, price: newPrice
+      }
+    });
+
+    this.setState({coinData: newCoinData})
+  }
+    
   render() {
     return (
       <Div>
         <ExchangeHeader />
         <AccountBalance amount={this.state.balance} /> 
-        <CoinList coinData={this.state.coinData} />
+        <CoinList coinData={this.state.coinData} handleRefresh={this.handleRefresh} />
       </Div>
     );
   }
