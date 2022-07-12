@@ -12,10 +12,8 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-.coin-row{
-  margin: 10px;
-  padding: 10px;
+.coin-table{
+  background-color: #182c34;
 }
 
 .App-header {
