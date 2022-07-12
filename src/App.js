@@ -1,33 +1,54 @@
-import './App.css';
-import Coin from "./components/Coin/Coin"
+import React from 'react';
+import CoinList from "./components/CoinList/CoinList"
 import AccountBalance from "./components/AccountBalance/AccountBalance"
+import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
+import styled from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Coin Exchange
-        </p>
-      </header>
-      <AccountBalance amount={10000} /> 
-      <table className='coin-table'>
-        <thead>
-          <tr className='coin-row'>
-              <td>Name</td>
-              <td>Ticker</td>
-              <td>Price</td>
-              <td>Refresh</td>
-          </tr>
-        </thead>
-          <tbody>
-            <Coin name="Bitcoin" ticker="BTC" price={114}/>
-            <Coin name="Ether" ticker="ETH" price={124}/>
-            <Coin name="MATIC" ticker="MAT" price={12}/>
-          </tbody>
-        </table>
-    </div>
-  );
+const Div = styled.div`
+  text-align: center;
+  background-color: rgb(20, 56, 97);
+  color: #cccccc;
+`;
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      balance: 1000000,
+      coinData : [
+        {
+          name: "Bitcoin",
+          ticker: "BTC",
+          price: 321
+        },
+        {
+          name: "Ethereum",
+          ticker: "ETH",
+          price: 456
+        },
+        {
+          name: "Matic",
+          ticker: "MAT",
+          price: 123
+        },
+        {
+          name: "Cordano",
+          ticker: "CRD",
+          price: 143
+        }
+      ]
+    }
+  }
+
+  render() {
+    return (
+      <Div>
+        <ExchangeHeader />
+        <AccountBalance amount={this.state.balance} /> 
+        <CoinList coinData={this.state.coinData} />
+      </Div>
+    );
+  }
 }
 
 export default App;
