@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 
 const Section = styled.section `
@@ -10,22 +10,21 @@ const Section = styled.section `
 `;
 
 
-export default class AccountBalance extends Component {
-  render() {
-    const buttonText = this.props.showBalance ? 'Hide Balance' : 'Show Balance';
-    let contentMessage;
-    if (this.props.showBalance) {
-      contentMessage = <>Balance: $ {this.props.amount}</>;
-    }
-    return (
-      <Section>
-        {contentMessage}
-        <button onClick={this.props.handleBalanceVisibility}>{buttonText}</button>
-      </Section>
-    )
+export default function AccountBalance(props){
+  const buttonText = props.showBalance ? 'Hide Balance' : 'Show Balance';
+  let contentMessage;
+  
+  if (props.showBalance) {
+    contentMessage = <>Balance: $ {props.amount}</>;
   }
+  
+  return (
+    <Section>
+      {contentMessage}
+      <button onClick={props.handleBalanceVisibility}>{buttonText}</button>
+    </Section>
+  );
 }
-
 
 AccountBalance.propTypes = {
     amount: PropTypes.number.isRequired
