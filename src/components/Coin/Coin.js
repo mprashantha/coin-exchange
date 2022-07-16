@@ -8,27 +8,8 @@ const Td = styled.td `
 `;
 
 export default class Coin extends Component {
-  constructor (props){  
-    super(props);
-    this.state = {
-      price: this.props.price
-    }
-    this.handleClick = this.handleClick.bind(this);
-  }
-/*
-  componentDidMount() { //this is called once all the components are mounted on DOM
-    const callback = () => {
-      const randomPercent = 0.995 + Math.random() * 0.01;
-      this.setState( function(oldState) {
-        return {
-          price: oldState.price * randomPercent
-        };
-      });      
-    }
-    setInterval( callback, 1000); //test function to change the price frequently	
-  }
-*/
-  handleClick(event) {
+
+  handleClick = (event) => {
     event.preventDefault();
     this.props.handleRefresh(this.props.ticker);
   }
@@ -38,6 +19,7 @@ export default class Coin extends Component {
         <tr>
             <Td>{this.props.name}</Td>
             <Td>{this.props.ticker}</Td>
+            {this.props.showBalance ? <Td>{this.props.balance}</Td> : null}
             <Td>{this.props.price}</Td>
             <Td>
               <form action='#' method='POST'>
@@ -48,10 +30,6 @@ export default class Coin extends Component {
     )
   }
 }
-
-
-
-
 
 Coin.propTypes = {
   name: PropTypes.string.isRequired,

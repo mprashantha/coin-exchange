@@ -9,10 +9,19 @@ const Section = styled.section `
     padding: 1.5rem 0 1.5rem 5 rem;
 `;
 
+
 export default class AccountBalance extends Component {
   render() {
+    const buttonText = this.props.showBalance ? 'Hide Balance' : 'Show Balance';
+    let contentMessage;
+    if (this.props.showBalance) {
+      contentMessage = <>Balance: $ {this.props.amount}</>;
+    }
     return (
-      <Section>Balance: ${this.props.amount}</Section>
+      <Section>
+        {contentMessage}
+        <button onClick={this.props.handleBalanceVisibility}>{buttonText}</button>
+      </Section>
     )
   }
 }
